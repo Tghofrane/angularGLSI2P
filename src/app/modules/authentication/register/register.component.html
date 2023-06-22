@@ -1,0 +1,18 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input placeholder="FirstName" formControlName="firstName" type="text" name="firstName" required>
+  <input placeholder="LastName" formControlName="lastName" type="text" name="lastName" required>
+  <input placeholder="Email" formControlName="email" type="email" name="email" required>
+  <input placeholder="Password" formControlName="password" type="password" name="password" required>
+  <select class="" formControlName="role" name="role">
+    <option selected disabled>
+      Role
+    </option>
+    <option *ngFor="let role of roles" [ngValue]="role">
+      {{ role }}
+    </option>
+  </select>
+  <button color="warn" class="login-field" type="submit" [disabled]="!registerForm.valid">
+    Créer un compte
+  </button>
+
+</form>
