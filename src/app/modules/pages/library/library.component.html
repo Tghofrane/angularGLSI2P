@@ -1,0 +1,34 @@
+<div class="container library-page">
+
+  <h2>Library</h2>
+
+  <!-- Form for creating a new book -->
+  <app-book-form [book]="newBook" [isUpdateMode]="false" (submitForm)="createBook($event)" class="mt-4"></app-book-form>
+
+  <hr>
+
+  <!-- Display the list of books -->
+  <div *ngFor="let book of books; let i = index">
+    <strong>Title: </strong> {{ book.title }} <br>
+    <strong>Author: </strong> {{ book.author }} <br>
+    <strong>Status: </strong>
+    <span [ngStyle]="book.status === 'Available' ? 
+      { color: 'green' } :
+       book.status === 'Coming Soon' ?
+        { color: 'orange' } :
+         { color: 'red' }" class="status-indicator">
+      {{ book.status }}
+    </span>
+
+    <!-- Form for updating a book -->
+    <app-book-form [book]="book" [isUpdateMode]="true" (submitForm)="updateBook(i, $event)"
+      class="mt-3"></app-book-form>
+
+    <!-- Button to delete a book -->
+    <div class="d-flex justify-content-end">
+      <button (click)="deleteBook(i)" class="btn btn-danger mt-2">Delete</button>
+    </div>
+
+    <hr>
+  </div>
+</div>
