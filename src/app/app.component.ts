@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
-import {Router, NavigationEnd} from '@angular/router';
-import {AuthenticationService} from './services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-root",
@@ -11,12 +10,6 @@ export class AppComponent {
   title = "project-name";
   constructor(
     public router: Router,
-    private authenticationService: AuthenticationService
   ) {
-    router.events.subscribe((data: any) => {
-      if (data instanceof NavigationEnd && router.url.startsWith("/app")) {
-        this.authenticationService.getSession().subscribe(() => {});
-      }
-    });
   }
 }

@@ -1,32 +1,36 @@
 <div class="container library-page">
-
   <h2>Library</h2>
-
-  <!-- Form for creating a new book -->
   <app-book-form [book]="newBook" [isUpdateMode]="false" (submitForm)="createBook($event)" class="mt-4"></app-book-form>
-
+  <!-- The app-book-form component is used for creating a new book.
+       - The [book] attribute binds the 'newBook' object to the 'book' input property of the component.
+       - The [isUpdateMode] attribute sets the 'isUpdateMode' input property to 'false' so I can set the button text as "Add".
+       - The (submitForm) event binding triggers the 'createBook' method when the form is submitted -->
   <hr>
-
-  <!-- Display the list of books -->
   <div *ngFor="let book of books; let i = index">
+    <!-- Loop through each book in the 'books' array using structural directive *ngFor-->
     <strong>Title: </strong> {{ book.title }} <br>
     <strong>Author: </strong> {{ book.author }} <br>
     <strong>Status: </strong>
-    <span [ngStyle]="book.status === 'Available' ? 
-      { color: 'green' } :
-       book.status === 'Coming Soon' ?
-        { color: 'orange' } :
-         { color: 'red' }" class="status-indicator">
+    <span [ngStyle]="book.status === 'Available' ? { color: 'green' } :
+                      book.status === 'Coming Soon' ? { color: 'orange' } :
+                      { color: 'red' }" class="status-indicator">
+      <!-- The [ngStyle] directive applies dynamic styles to the span element based on the book's status.
+           - If the status is 'Available', the text color is set to green.
+           - If the status is 'Coming Soon', the text color is set to orange.
+           - For any other status (which is 'Out of stock'), the text color is set to red. -->
       {{ book.status }}
     </span>
-
-    <!-- Form for updating a book -->
     <app-book-form [book]="book" [isUpdateMode]="true" (submitForm)="updateBook(i, $event)"
       class="mt-3"></app-book-form>
+    <!-- The app-book-form component is used for updating a book.
+         - The [book] attribute binds the 'book' object to the 'book' input property of the component.
+         - The [isUpdateMode] attribute sets the 'isUpdateMode' property to 'true' so in the component I can change the button span to 'update' above 'add' based on it.
+         - The (submitForm) event binding triggers the 'updateBook' method when the form is submitted-->
 
-    <!-- Button to delete a book -->
     <div class="d-flex justify-content-end">
       <button (click)="deleteBook(i)" class="btn btn-danger mt-2">Delete</button>
+      <!-- The button triggers the 'deleteBook' method when clicked.
+           - The method is passed the index as an arg to identify which book to delete -->
     </div>
 
     <hr>

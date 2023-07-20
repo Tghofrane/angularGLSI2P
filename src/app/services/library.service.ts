@@ -9,7 +9,7 @@ export class LibraryService {
   constructor() { }
 
   createBook(book: any): void {
-    // Add new book to the array
+    // Add new book to the array books
     this.books.push(book);
   }
 
